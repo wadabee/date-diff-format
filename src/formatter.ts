@@ -1,3 +1,5 @@
+import i18n from "./i18n";
+
 class Formatter {
   private from: Date;
   constructor(from: Date = new Date(Date.now())) {
@@ -11,11 +13,7 @@ class Formatter {
   strictFormat(to: Date): string {
     const diff_ = this.diff(to);
 
-    if (diff_ === 1) {
-      return "1 second ago";
-    } else {
-      return `${diff_} seconds ago`;
-    }
+    return i18n.t("second", { smart_count: diff_ });
   }
 
   laxFormat(to: Date): string {
