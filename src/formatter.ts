@@ -29,6 +29,7 @@ class Formatter {
     } else if (diff >= MONTH) {
       message = i18n.t("month", { smart_count: Math.floor(diff / MONTH) });
     }
+    Math.ceil;
     return message;
   }
 
