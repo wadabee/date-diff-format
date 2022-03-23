@@ -24,7 +24,8 @@ class Formatter {
     } else if (diff >= HOUR && diff < DAY) {
       message = i18n.t("hour", { smart_count: Math.floor(diff / HOUR) });
     } else if (diff >= DAY && diff < MONTH) {
-      message = i18n.t("day", { smart_count: Math.floor(diff / DAY) });
+      const diffDay = Math.abs(to.getDate() - this.from.getDate());
+      message = i18n.t("day", { smart_count: diffDay });
     } else if (diff >= MONTH) {
       message = i18n.t("month", { smart_count: Math.floor(diff / MONTH) });
     }
@@ -32,7 +33,7 @@ class Formatter {
   }
 
   private diff_(to: Date): number {
-    return (to.getTime() - this.from.getTime()) / 1000;
+    return (this.from.getTime() - to.getTime()) / 1000;
   }
 }
 
