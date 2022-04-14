@@ -80,71 +80,74 @@ describe("formatter", () => {
       expect(ddf.format(to)).toBe("2 days ago");
     });
 
-    it("30days ago", () => {
+    it("30days ago and same month", () => {
       const ddf = new Formatter(new Date("2022/05/31 00:00:00"));
       const to = new Date("2022/05/01 00:00:00");
+      expect(ddf.format(to)).toBe("30 days ago");
+    });
+
+    it("30days ago and different month", () => {
+      const ddf = new Formatter(new Date("2022/05/15 00:00:00"));
+      const to = new Date("2022/04/15 00:00:00");
       expect(ddf.format(to)).toBe("30 days ago");
     });
   });
 
   describe("month", () => {
-    // it("31days ago and last month", () => {
-    //   const to = new Date("2022/02/01 00:00:00");
-    //   expect(ddf.format(to)).toBe("last month");
-    // });
-    // it("31days ago and 2 months ago", () => {
-    //   ddf = new Formatter(new Date("2022/01/31 00:00:00"));
-    //   const to = new Date("2022/03/03 00:00:00");
-    //   expect(ddf.format(to)).toBe("2 months ago");
-    // });
-    // it("less then 18months ago", () => {
-    //   ddf = new Formatter(new Date("2020/01/01 00:00:00"));
-    //   const to = new Date("2021/05/31 23:59:59");
-    //   expect(ddf.format(to)).toBe("17 months ago");
-    // });
+    it("31days ago and last month", () => {
+      const ddf = new Formatter(new Date("2022/05/31 00:00:00"));
+      const to = new Date("2022/04/30 00:00:00");
+      expect(ddf.format(to)).toBe("last month");
+    });
+    it("31days ago and 2 months ago", () => {
+      const ddf = new Formatter(new Date("2022/05/01 00:00:00"));
+      const to = new Date("2022/03/31 00:00:00");
+      expect(ddf.format(to)).toBe("2 months ago");
+    });
+    it("less then 18months ago", () => {
+      const ddf = new Formatter(new Date("2022/06/01 00:00:00"));
+      const to = new Date("2021/01/01 00:00:00");
+      expect(ddf.format(to)).toBe("17 months ago");
+    });
   });
 
-  // it("18months ago and 1year ago", () => {
-  //   ddf = new Formatter(new Date("2020/01/01 00:00:00"));
-  //   const to = new Date("2021/06/01 00:00:00");
-  //   expect(ddf.format(to)).toBe("last year");
-  // });
-
-  // it("18months ago and 2year ago", () => {
-  //   ddf = new Formatter(new Date("2020/12/01 00:00:00"));
-  //   const to = new Date("2022/06/30 00:00:00");
-  //   expect(ddf.format(to)).toBe("2 years ago");
-  // });
-
-  // it("23months ago and 1year ago", () => {
-  //   ddf = new Formatter(new Date("2020/01/01 00:00:00"));
-  //   const to = new Date("2021/12/31 00:00:00");
-  //   expect(ddf.format(to)).toBe("last year");
-  // });
-
-  // it("23months ago and 2year ago", () => {
-  //   ddf = new Formatter(new Date("2020/01/01 00:00:00"));
-  //   const to = new Date("2022/01/01 00:00:00");
-  //   expect(ddf.format(to)).toBe("2 years ago");
-  // });
-
-  // it("23months ago and 3year ago", () => {
-  //   ddf = new Formatter(new Date("2020/12/31 00:00:00"));
-  //   const to = new Date("2023/01/01 00:00:00");
-  //   expect(ddf.format(to)).toBe("2 years ago");
-  // });
-
-  // it("29months ago and 3year ago", () => {
-  //   ddf = new Formatter(new Date("2020/12/31 00:00:00"));
-  //   const to = new Date("2023/07/01 00:00:00");
-  //   expect(ddf.format(to)).toBe("2 years ago");
-  // });
-
-  // it("30months ago and 3year ago", () => {
-  //   ddf = new Formatter(new Date("2020/12/31 00:00:00"));
-  //   const to = new Date("2023/08/01 00:00:00");
-  //   expect(ddf.format(to)).toBe("3 years ago");
-  // });
+  describe("year", () => {
+    it("18months ago and 1year ago", () => {
+      const ddf = new Formatter(new Date("2022/07/01 00:00:00"));
+      const to = new Date("2020/01/01 00:00:00");
+      expect(ddf.format(to)).toBe("last year");
+    });
+    it("18months ago and 2year ago", () => {
+      const ddf = new Formatter(new Date("2022/01/01 00:00:00"));
+      const to = new Date("2020/06/01 00:00:00");
+      expect(ddf.format(to)).toBe("2 years ago");
+    });
+    it("23months ago and 1year ago", () => {
+      const ddf = new Formatter(new Date("2022/12/31 00:00:00"));
+      const to = new Date("2021/01/01 00:00:00");
+      expect(ddf.format(to)).toBe("last year");
+    });
+    it("23months ago and 2year ago", () => {
+      const ddf = new Formatter(new Date("2022/01/01 00:00:00"));
+      const to = new Date("2020/02/01 00:00:00");
+      expect(ddf.format(to)).toBe("2 years ago");
+    });
+    // it("23months ago and 3year ago", () => {
+    //   ddf = new Formatter(new Date("2020/12/31 00:00:00"));
+    //   const to = new Date("2023/01/01 00:00:00");
+    //   expect(ddf.format(to)).toBe("2 years ago");
+    // });
+    // it("29months ago and 3year ago", () => {
+    //   ddf = new Formatter(new Date("2020/12/31 00:00:00"));
+    //   const to = new Date("2023/07/01 00:00:00");
+    //   expect(ddf.format(to)).toBe("2 years ago");
+    // });
+    // it("30months ago and 3year ago", () => {
+    //   ddf = new Formatter(new Date("2020/12/31 00:00:00"));
+    //   const to = new Date("2023/08/01 00:00:00");
+    //   expect(ddf.format(to)).toBe("3 years ago");
+    // });
+  });
 
   it.todo("i18n");
   it.todo("global setting");
